@@ -41,30 +41,32 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<GifElement> _listOfElements = null;
     private ApiHttpGetter _apiHttpGetter;
     ProgressDialog _pd;
+    RecyclerView _recyclerView;
     private String _completeUrl = "https://api.giphy.com/v1/gifs/search?api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=&limit=25&offset=0&rating=g&lang=en";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        _listOfElements = new ArrayList<>();
-        _apiHttpGetter = new ApiHttpGetter();
+        _recyclerView = findViewById(R.id.element_recycler_view);
+        _apiHttpGetter = new ApiHttpGetter(_listOfElements, this, _recyclerView, this);
         _apiHttpGetter.getElements();
-        getDataAndFillList();
-        RecyclerView recyclerView = findViewById(R.id.element_recycler_view);
-        GifElementAdapter gifElementAdapter = new GifElementAdapter(this, _listOfElements);
-        recyclerView.setAdapter(gifElementAdapter);
-       // getDataFromApi();
     }
 
-    private void getDataAndFillList() {
-        _listOfElements.clear();
-        //Log.d("TAG1", "public void getDataAndFillList worked");
-        for(int i = 0; i < 10; i++) {
-            _listOfElements.add(new GifElement("Element N" + (i+1), "http://domain.com/?i=" + i));
-        }
-       // Log.d("TAG1", "getDataAndFillList _listOfElements.size():" + _listOfElements.size());
-        Toast.makeText(this, "List filled successfully", Toast.LENGTH_SHORT).show();
+//    private void getDataAndFillList() {
+//        _listOfElements.clear();
+//        //Log.d("TAG1", "public void getDataAndFillList worked");
+//        for(int i = 0; i < 10; i++) {
+//            _listOfElements.add(new GifElement("Element N" + (i+1), "http://domain.com/?i=" + i));
+//        }
+//       // Log.d("TAG1", "getDataAndFillList _listOfElements.size():" + _listOfElements.size());
+//        Toast.makeText(this, "List filled successfully", Toast.LENGTH_SHORT).show();
+//    }
+
+    public void showData(ArrayList<GifElement> listOfElements) {
+        RecyclerView recyclerView = findViewById(R.id.element_recycler_view);
+        GifElementAdapter gifElementAdapter = new GifElementAdapter(this, listOfElements);
+        recyclerView.setAdapter(gifElementAdapter);
     }
 
     private void getDataFromApi() {
@@ -93,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TAG1","93 failure " + t);
             }
         });
+    }
+
+    public void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 }

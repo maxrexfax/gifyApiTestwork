@@ -21,23 +21,18 @@ public class GifElement {
     private String source_tld;
     private String source_post_url;
     private boolean isSticker;
-    private Date import_datetime;
-    private Date trending_datetime;
+    private String import_datetime;
+    private String trending_datetime;
     //images
     private ImageInner imageInner;
-//    private String mp4_size;
-//    private String mp4;
-//    private String webp_size;
-//    private String webp;
-//    private String frames;
-//    private String hash;
 
     public GifElement(String title, String embedUrl){
         this.title = title;
         this.embed_url = embedUrl;
     }
 
-    public GifElement(String type,
+    public GifElement(
+                      String type,
                       String id,
                       String url,
                       String slug,
@@ -51,7 +46,7 @@ public class GifElement {
                       String contentUrl,
                       String sourceTld,
                       String sourcePostUrl,
-                      boolean isSticker,
+                      int isSticker,
                       String importTime,
                       String trendingTime,
                       String imageName,
@@ -73,9 +68,9 @@ public class GifElement {
         this.content_url = contentUrl;
         this.source_tld = sourceTld;
         this.source_post_url = sourcePostUrl;
-        this.isSticker = isSticker;
-        this.import_datetime = new Date(importTime);
-        this.trending_datetime = new Date(trendingTime);
+        this.isSticker = isSticker == 1;
+        this.import_datetime = importTime;
+        this.trending_datetime = trendingTime;
         this.imageInner = new ImageInner();
         this.imageInner.name = imageName;
         this.imageInner.height = Integer.parseInt(height);
@@ -215,19 +210,19 @@ public class GifElement {
         isSticker = sticker;
     }
 
-    public Date getImport_datetime() {
+    public String getImport_datetime() {
         return import_datetime;
     }
 
-    public void setImport_datetime(Date import_datetime) {
+    public void setImport_datetime(String import_datetime) {
         this.import_datetime = import_datetime;
     }
 
-    public Date getTrending_datetime() {
+    public String getTrending_datetime() {
         return trending_datetime;
     }
 
-    public void setTrending_datetime(Date trending_datetime) {
+    public void setTrending_datetime(String trending_datetime) {
         this.trending_datetime = trending_datetime;
     }
 
@@ -239,7 +234,7 @@ public class GifElement {
         this.imageInner = imageInner;
     }
 
-    private class ImageInner{
+    public class ImageInner{
         public String name;
         public int height;
         public int width;

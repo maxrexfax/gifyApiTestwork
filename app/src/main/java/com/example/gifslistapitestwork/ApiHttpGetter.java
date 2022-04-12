@@ -1,7 +1,11 @@
 package com.example.gifslistapitestwork;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Looper;
 import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,27 +19,32 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class ApiHttpGetter {
-        //Handler handler = MainActivity.handler;
-        private String _baseUrl = "https://android-kotlin-fun-mars-server.appspot.com";
-        //private String _baseUrl = "https://api.giphy.com/v1/gifs/search?";
-        //private String _baseUrl = "http://tests.loc/";
-        //private String _reqParamsUrl = "api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=&limit=25&offset=0&rating=g&lang=en";
-        private String _completeUrl = "https://api.giphy.com/v1/gifs/search?api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=deadpool&limit=25&offset=0&rating=g&lang=en";
-        public void getElements() {
-        getDataFromUrl(_completeUrl);
-        Log.d("TAG1", "LINE 29 getElements");
+    private ArrayList<GifElement> _listOfElements;
+    private Context _context;
+    private MainActivity _activity;
+    private RecyclerView _recyclerView;
+    //Handler handler = MainActivity.handler;
+    private String _baseUrl = "https://android-kotlin-fun-mars-server.appspot.com";
+    //private String _baseUrl = "https://api.giphy.com/v1/gifs/search?";
+    //private String _baseUrl = "http://tests.loc/";
+    //private String _reqParamsUrl = "api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=&limit=25&offset=0&rating=g&lang=en";
+    private String _completeUrl = "https://api.giphy.com/v1/gifs/search?api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=deadpool&limit=25&offset=0&rating=g&lang=en";
 
+    public ApiHttpGetter(ArrayList<GifElement> listOfElements, Context context, RecyclerView recyclerView, MainActivity activity) {
+        this._listOfElements  = new ArrayList<>();
+        this._context = context;
+        this._activity = activity;
+        this._recyclerView = recyclerView;
     }
 
-
-
-    private void getDataFromUrl(String demoIdUrl) {
+    public void getElements() {
         Runnable r = new Runnable()
         {
             @Override
@@ -45,7 +54,7 @@ public class ApiHttpGetter {
                     HttpURLConnection urlConnection = null;
                     URL url = null;
                     try {
-                        url = new URL(demoIdUrl);
+                        url = new URL(_completeUrl);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
@@ -65,16 +74,15 @@ public class ApiHttpGetter {
                     }
                     br.close();
                     String jsonString = sb.toString();
-                    Log.d("TAG1","JSON: " + jsonString);
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    Log.d("TAG1","jsonArray.length(): " + jsonArray.length());
-                    //Log.d("TAG1","jsonArray.toString(): " + jsonArray.toString());
-                    GifElement[] gifElements = new GifElement[jsonArray.length()];
+
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject tmpObj = jsonArray.getJSONObject(i);
-                        JSONObject tmpImage = tmpObj.getJSONObject("original");
-                        gifElements[i] = new GifElement(
+                        JSONObject tmpImages = tmpObj.getJSONObject("images");
+                        JSONObject tmpImage = tmpImages.getJSONObject("original");
+
+                        _listOfElements.add( new GifElement(
                                 tmpObj.getString("type"),
                                 tmpObj.getString("id"),
                                 tmpObj.getString("url"),
@@ -89,25 +97,29 @@ public class ApiHttpGetter {
                                 tmpObj.getString("content_url"),
                                 tmpObj.getString("source_tld"),
                                 tmpObj.getString("source_post_url"),
-                                tmpObj.getBoolean("is_sticker"),
+                                tmpObj.getInt("is_sticker"),
                                 tmpObj.getString("import_datetime"),
                                 tmpObj.getString("trending_datetime"),
                                 "original",
                                 tmpImage.getString("height"),
                                 tmpImage.getString("width"),
-                                tmpImage.getString("size"));
-
-
-                        Log.d("TAG1","tmpObj.getString(\"type\"): " + tmpObj.getString("type"));
-                        Log.d("TAG1","tmpObj.getString(\"id\"): " + tmpObj.getString("id"));
+                                tmpImage.getString("size")
+                                 ));
                     }
+                    _activity.runOnUiThread(new Runnable()
+                    {
+                        public void run()
+                        {
+                            _activity.showData(_listOfElements);
+                        }
+                    });
+
                 }catch (Exception ex) {
-                    System.out.print(ex.getMessage());
+                    Log.d("TAG1", "Class ApiHttpGetter, Exception message:" + ex.getMessage());
                 }
             }
         };
         Thread t = new Thread(r);
         t.start();
-        Log.d("TAG1", "LINE 73 getDataFromUrl");
     }
 }
