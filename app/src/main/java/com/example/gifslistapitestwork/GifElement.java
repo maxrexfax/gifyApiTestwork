@@ -52,7 +52,9 @@ public class GifElement {
                       String imageName,
                       String height,
                       String width,
-                      String size) {
+                      String size,
+                      String imageUrl
+    ) {
         this.creation_id = instanceCounter++;
         this.type = type;
         this.id = id;
@@ -76,6 +78,7 @@ public class GifElement {
         this.imageInner.height = Integer.parseInt(height);
         this.imageInner.width = Integer.parseInt(width);
         this.imageInner.size = Integer.parseInt(size);
+        this.imageInner.url = imageUrl;
     }
 
     public static int getInstanceCounter() {
@@ -235,9 +238,52 @@ public class GifElement {
     }
 
     public class ImageInner{
+
         public String name;
         public int height;
         public int width;
         public int size;
+        public String url;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
     }
 }

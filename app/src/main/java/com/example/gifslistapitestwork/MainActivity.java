@@ -101,4 +101,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    public void showOneImage(View view) {
+        showToast("Click!");
+    }
 }

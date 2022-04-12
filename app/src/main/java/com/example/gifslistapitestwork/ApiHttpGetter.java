@@ -103,7 +103,8 @@ public class ApiHttpGetter {
                                 "original",
                                 tmpImage.getString("height"),
                                 tmpImage.getString("width"),
-                                tmpImage.getString("size")
+                                tmpImage.getString("size"),
+                                tmpImage.getString("url")
                                  ));
                     }
                     _activity.runOnUiThread(new Runnable()

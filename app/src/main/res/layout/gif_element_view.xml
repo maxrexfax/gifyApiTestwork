@@ -20,5 +20,6 @@
         android:layout_height="60dp"
         android:layout_below="@+id/title_text_view"
         android:background="@color/teal_weak"
+        android:onClick="showOneImage"
         />
 </RelativeLayout>
