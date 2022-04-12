@@ -43,28 +43,21 @@ public class GifElementAdapter extends RecyclerView.Adapter<GifElementAdapter.Vi
         @Override
         public void onBindViewHolder(GifElementAdapter.ViewHolder holder, int position) {
                 GifElement element = _gifElements.get(position);
-                //Uri imageUri = Uri.parse(element.getImageInner().getUrl());
-                //Uri imageUri = Uri.fromFile(new File(element.getImageInner().getUrl()));
                 URL url = null;
                 try {
-                        url = new URL(element.getImageInner().getUrl());Log.d("TAG1", "LINE 48 TRY: " + url.toString() );
+                        url = new URL(element.getImageInner().getUrl());
                 } catch (MalformedURLException e) {
                         Log.d("TAG1", "LINE 50 CATCH" + e.getMessage() );
                 }
 
                 Bitmap bitmap = null;
-                Log.d("TAG1", "LINE 54 GifElementAdapter onBindViewHolder  element.getEmbed_url():" + element.getImageInner().getUrl());
+
                 try {
-                        //bitmap = MediaStore.Images.Media.getBitmap(_context.getContentResolver(), url);
-                        //bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                         setImageInImageView(holder, url);
-                        Log.d("TAG1", "LINE 58 TRY" );
                 } catch (Exception e) {
                         Log.d("TAG1", "LINE 60 CATCH" + e.getMessage() );
                 }
-                //holder.gifView.setImageBitmap(bitmap);
                 holder.titleView.setText(element.getTitle());
-               // Log.d("TAG1", "GifElementAdapter onBindViewHolder  element.getTitle():" + element.getTitle());
         }
 
         public void setImageInImageView(GifElementAdapter.ViewHolder holder, URL urlIn) {
@@ -83,6 +76,7 @@ public class GifElementAdapter extends RecyclerView.Adapter<GifElementAdapter.Vi
                                         @Override
                                         public void run() {
                                                 holder.gifView.setImageBitmap(bitmap);
+                                                holder.gifView.setTag( urlIn );
                                         }
                                 });
                         }
@@ -104,7 +98,6 @@ public class GifElementAdapter extends RecyclerView.Adapter<GifElementAdapter.Vi
                         super(view);
                         gifView = view.findViewById(R.id.gif_image_view);
                         titleView = view.findViewById(R.id.title_text_view);
-                       // Log.d("TAG1", "GifElementAdapter public static class ViewHolder extends RecyclerView.ViewHolder:");
                 }
         }
 }

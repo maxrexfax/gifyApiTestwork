@@ -27,21 +27,12 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class ApiHttpGetter {
     private ArrayList<GifElement> _listOfElements;
-    private Context _context;
     private MainActivity _activity;
-    private RecyclerView _recyclerView;
-    //Handler handler = MainActivity.handler;
-    private String _baseUrl = "https://android-kotlin-fun-mars-server.appspot.com";
-    //private String _baseUrl = "https://api.giphy.com/v1/gifs/search?";
-    //private String _baseUrl = "http://tests.loc/";
-    //private String _reqParamsUrl = "api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=&limit=25&offset=0&rating=g&lang=en";
     private String _completeUrl = "https://api.giphy.com/v1/gifs/search?api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=deadpool&limit=25&offset=0&rating=g&lang=en";
 
-    public ApiHttpGetter(ArrayList<GifElement> listOfElements, Context context, RecyclerView recyclerView, MainActivity activity) {
+    public ApiHttpGetter(MainActivity activity) {
         this._listOfElements  = new ArrayList<>();
-        this._context = context;
         this._activity = activity;
-        this._recyclerView = recyclerView;
     }
 
     public void getElements() {
