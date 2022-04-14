@@ -11,69 +11,25 @@ public class GifElement {
 
     static int instanceCounter = 1;
     private int creation_id;
-    @SerializedName("type")
-    @Expose
     private String type;
-    @SerializedName("id")
-    @Expose
     private String id;
-    @SerializedName("url")
-    @Expose
     private String url;
-    @SerializedName("slug")
-    @Expose
     private String slug;
-    @SerializedName("bitly_gif_url")
-    @Expose
     private String bitly_gif_url;
-    @SerializedName("bitly_url")
-    @Expose
     private String bitly_url;
-    @SerializedName("embed_url")
-    @Expose
     private String embed_url;
-    @SerializedName("username")
-    @Expose
     private String username;
-    @SerializedName("source")
-    @Expose
     private String source;
-    @SerializedName("title")
-    @Expose
     private String title;
-    @SerializedName("rating")
-    @Expose
     private String rating;
-    @SerializedName("content_url")
-    @Expose
     private String content_url;
-    @SerializedName("source_tld")
-    @Expose
     private String source_tld;
-    @SerializedName("source_post_url")
-    @Expose
     private String source_post_url;
-    @SerializedName("isSticker")
-    @Expose
     private boolean isSticker;
-    @SerializedName("import_datetime")
-    @Expose
     private String import_datetime;
-    @SerializedName("trending_datetime")
-    @Expose
     private String trending_datetime;
-
-    @SerializedName("imageArray")
-    @Expose
     private Map<String, String> imageArray;
-    @SerializedName("original")
-    @Expose
     private Original original;
-
-    public GifElement(String title, String embedUrl){
-        this.title = title;
-        this.embed_url = embedUrl;
-    }
 
     public GifElement(
                       String type,
@@ -123,11 +79,6 @@ public class GifElement {
         this.original.width = Integer.parseInt(width);
         this.original.size = Integer.parseInt(size);
         this.original.url = imageUrl;
-//        this.imageArray = new HashMap<String, String>();
-//        this.imageArray.put("height", height);
-//        this.imageArray.put("width", width);
-//        this.imageArray.put("size", size);
-//        this.imageArray.put("url", url);
     }
 
     public static int getInstanceCounter() {
@@ -295,38 +246,16 @@ public class GifElement {
     }
 
     public class Original{
-        @SerializedName("name")
-        @Expose
         public String name;
-        @SerializedName("height")
-        @Expose
         public int height;
-        @SerializedName("width")
-        @Expose
         public int width;
-        @SerializedName("size")
-        @Expose
         public int size;
-        @SerializedName("url")
-        @Expose
         public String url;
-        @SerializedName("mp4_size")
-        @Expose
         public String mp4_size;
-        @SerializedName("mp4")
-        @Expose
         public String mp4;
-        @SerializedName("webp_size")
-        @Expose
         public String webp_size;
-        @SerializedName("webp")
-        @Expose
         public String webp;
-        @SerializedName("frames")
-        @Expose
         public String frames;
-        @SerializedName("hash")
-        @Expose
         public String hash;
 
         public String getName() {
