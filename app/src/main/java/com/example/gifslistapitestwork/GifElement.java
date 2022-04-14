@@ -1,30 +1,74 @@
 package com.example.gifslistapitestwork;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GifElement {
 
     static int instanceCounter = 1;
     private int creation_id;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("url")
+    @Expose
     private String url;
+    @SerializedName("slug")
+    @Expose
     private String slug;
+    @SerializedName("bitly_gif_url")
+    @Expose
     private String bitly_gif_url;
+    @SerializedName("bitly_url")
+    @Expose
     private String bitly_url;
+    @SerializedName("embed_url")
+    @Expose
     private String embed_url;
+    @SerializedName("username")
+    @Expose
     private String username;
+    @SerializedName("source")
+    @Expose
     private String source;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("rating")
+    @Expose
     private String rating;
+    @SerializedName("content_url")
+    @Expose
     private String content_url;
+    @SerializedName("source_tld")
+    @Expose
     private String source_tld;
+    @SerializedName("source_post_url")
+    @Expose
     private String source_post_url;
+    @SerializedName("isSticker")
+    @Expose
     private boolean isSticker;
+    @SerializedName("import_datetime")
+    @Expose
     private String import_datetime;
+    @SerializedName("trending_datetime")
+    @Expose
     private String trending_datetime;
-    //images
-    private ImageInner imageInner;
+
+    @SerializedName("imageArray")
+    @Expose
+    private Map<String, String> imageArray;
+    @SerializedName("original")
+    @Expose
+    private Original original;
 
     public GifElement(String title, String embedUrl){
         this.title = title;
@@ -73,12 +117,17 @@ public class GifElement {
         this.isSticker = isSticker == 1;
         this.import_datetime = importTime;
         this.trending_datetime = trendingTime;
-        this.imageInner = new ImageInner();
-        this.imageInner.name = imageName;
-        this.imageInner.height = Integer.parseInt(height);
-        this.imageInner.width = Integer.parseInt(width);
-        this.imageInner.size = Integer.parseInt(size);
-        this.imageInner.url = imageUrl;
+        this.original = new Original();
+        this.original.name = imageName;
+        this.original.height = Integer.parseInt(height);
+        this.original.width = Integer.parseInt(width);
+        this.original.size = Integer.parseInt(size);
+        this.original.url = imageUrl;
+//        this.imageArray = new HashMap<String, String>();
+//        this.imageArray.put("height", height);
+//        this.imageArray.put("width", width);
+//        this.imageArray.put("size", size);
+//        this.imageArray.put("url", url);
     }
 
     public static int getInstanceCounter() {
@@ -229,21 +278,56 @@ public class GifElement {
         this.trending_datetime = trending_datetime;
     }
 
-    public ImageInner getImageInner() {
-        return imageInner;
+    public Map<String, String> getImageArray() {
+        return imageArray;
     }
 
-    public void setImageInner(ImageInner imageInner) {
-        this.imageInner = imageInner;
+    public void setImageArray(Map<String, String> imageArray) {
+        this.imageArray = imageArray;
     }
 
-    public class ImageInner{
+    public Original getOriginal() {
+        return original;
+    }
 
+    public void setOriginal(Original original) {
+        this.original = original;
+    }
+
+    public class Original{
+        @SerializedName("name")
+        @Expose
         public String name;
+        @SerializedName("height")
+        @Expose
         public int height;
+        @SerializedName("width")
+        @Expose
         public int width;
+        @SerializedName("size")
+        @Expose
         public int size;
+        @SerializedName("url")
+        @Expose
         public String url;
+        @SerializedName("mp4_size")
+        @Expose
+        public String mp4_size;
+        @SerializedName("mp4")
+        @Expose
+        public String mp4;
+        @SerializedName("webp_size")
+        @Expose
+        public String webp_size;
+        @SerializedName("webp")
+        @Expose
+        public String webp;
+        @SerializedName("frames")
+        @Expose
+        public String frames;
+        @SerializedName("hash")
+        @Expose
+        public String hash;
 
         public String getName() {
             return name;
@@ -283,6 +367,54 @@ public class GifElement {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        public String getMp4_size() {
+            return mp4_size;
+        }
+
+        public void setMp4_size(String mp4_size) {
+            this.mp4_size = mp4_size;
+        }
+
+        public String getMp4() {
+            return mp4;
+        }
+
+        public void setMp4(String mp4) {
+            this.mp4 = mp4;
+        }
+
+        public String getWebp_size() {
+            return webp_size;
+        }
+
+        public void setWebp_size(String webp_size) {
+            this.webp_size = webp_size;
+        }
+
+        public String getWebp() {
+            return webp;
+        }
+
+        public void setWebp(String webp) {
+            this.webp = webp;
+        }
+
+        public String getFrames() {
+            return frames;
+        }
+
+        public void setFrames(String frames) {
+            this.frames = frames;
+        }
+
+        public String getHash() {
+            return hash;
+        }
+
+        public void setHash(String hash) {
+            this.hash = hash;
         }
 
     }

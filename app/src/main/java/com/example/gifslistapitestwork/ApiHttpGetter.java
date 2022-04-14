@@ -20,13 +20,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class ApiHttpGetter {
-    private ArrayList<GifElement> _listOfElements;
+    private List<GifElement> _listOfElements;
     private MainActivity _activity;
     private String _completeUrl = "https://api.giphy.com/v1/gifs/search?api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=deadpool&limit=25&offset=0&rating=g&lang=en";
 
