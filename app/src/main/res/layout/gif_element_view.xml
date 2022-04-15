@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/relative_container"
+    android:onClick="showOneImage"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
@@ -20,6 +22,5 @@
         android:layout_height="60dp"
         android:layout_below="@+id/title_text_view"
         android:background="@color/teal_weak"
-        android:onClick="showOneImage"
         />
 </RelativeLayout>

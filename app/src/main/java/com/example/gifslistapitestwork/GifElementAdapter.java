@@ -12,11 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,16 +70,17 @@ public class GifElementAdapter extends RecyclerView.Adapter<GifElementAdapter.Vi
                         @Override
                         public void run()
                         {
-                                try {
-                                        bitmap = BitmapFactory.decodeStream(urlIn.openConnection().getInputStream());
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
+//                                try {
+//                                        bitmap = BitmapFactory.decodeStream(urlIn.openConnection().getInputStream());
+//                                } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                }
                                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                                         @Override
                                         public void run() {
-                                                holder.gifView.setImageBitmap(bitmap);
-                                                holder.gifView.setTag( urlIn );
+                                                Glide.with(_context).load(urlIn).into(new DrawableImageViewTarget(holder.gifView));//to show gifs
+                                                //holder.gifView.setImageBitmap(bitmap);//to show images
+                                                holder.relativeLayout.setTag( urlIn );
                                         }
                                 });
                         }
@@ -94,10 +98,12 @@ public class GifElementAdapter extends RecyclerView.Adapter<GifElementAdapter.Vi
         public static class ViewHolder extends RecyclerView.ViewHolder {
                 final ImageView gifView;
                 final TextView titleView;
+                final RelativeLayout relativeLayout;
                 ViewHolder(View view){
                         super(view);
                         gifView = view.findViewById(R.id.gif_image_view);
                         titleView = view.findViewById(R.id.title_text_view);
+                        relativeLayout = view.findViewById(R.id.relative_container);
                 }
         }
 }

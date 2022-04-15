@@ -1,10 +1,5 @@
 package com.example.gifslistapitestwork;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class GifElement {
