@@ -45,7 +45,7 @@ public class GifElementAdapter extends RecyclerView.Adapter<GifElementAdapter.Vi
                 GifElement element = _gifElements.get(position);
                 URL url = null;
                 try {
-                        url = new URL(element.getImageInner().getUrl());
+                        url = new URL(element.getImages().getOriginal().getUrl());
                 } catch (MalformedURLException e) {
                         Log.d("TAG1", "LINE 50 CATCH" + e.getMessage() );
                 }

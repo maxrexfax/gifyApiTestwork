@@ -1,84 +1,81 @@
 package com.example.gifslistapitestwork;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 public class GifElement {
 
     static int instanceCounter = 1;
     private int creation_id;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("url")
+    @Expose
     private String url;
+    @SerializedName("slug")
+    @Expose
     private String slug;
+    @SerializedName("bitly_gif_url")
+    @Expose
     private String bitly_gif_url;
+    @SerializedName("bitly_url")
+    @Expose
     private String bitly_url;
+    @SerializedName("embed_url")
+    @Expose
     private String embed_url;
+    @SerializedName("username")
+    @Expose
     private String username;
+    @SerializedName("source")
+    @Expose
     private String source;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("rating")
+    @Expose
     private String rating;
+    @SerializedName("content_url")
+    @Expose
     private String content_url;
+    @SerializedName("source_tld")
+    @Expose
     private String source_tld;
+    @SerializedName("source_post_url")
+    @Expose
     private String source_post_url;
+    @SerializedName("isSticker")
+    @Expose
     private boolean isSticker;
+    @SerializedName("import_datetime")
+    @Expose
     private String import_datetime;
+    @SerializedName("trending_datetime")
+    @Expose
     private String trending_datetime;
+
     //images
-    private ImageInner imageInner;
+    private Images images;
 
     public GifElement(String title, String embedUrl){
         this.title = title;
         this.embed_url = embedUrl;
     }
 
-    public GifElement(
-                      String type,
-                      String id,
-                      String url,
-                      String slug,
-                      String bitlyGifUrl,
-                      String bitlyUrl,
-                      String embedUrl,
-                      String username,
-                      String source,
-                      String title,
-                      String rating,
-                      String contentUrl,
-                      String sourceTld,
-                      String sourcePostUrl,
-                      int isSticker,
-                      String importTime,
-                      String trendingTime,
-                      String imageName,
-                      String height,
-                      String width,
-                      String size,
-                      String imageUrl
-    ) {
-        this.creation_id = instanceCounter++;
-        this.type = type;
-        this.id = id;
-        this.url = url;
-        this.slug = slug;
-        this.bitly_gif_url = bitlyGifUrl;
-        this.bitly_url = bitlyUrl;
-        this.embed_url = embedUrl;
-        this.username = username;
-        this.source = source;
-        this.title = title;
-        this.rating = rating;
-        this.content_url = contentUrl;
-        this.source_tld = sourceTld;
-        this.source_post_url = sourcePostUrl;
-        this.isSticker = isSticker == 1;
-        this.import_datetime = importTime;
-        this.trending_datetime = trendingTime;
-        this.imageInner = new ImageInner();
-        this.imageInner.name = imageName;
-        this.imageInner.height = Integer.parseInt(height);
-        this.imageInner.width = Integer.parseInt(width);
-        this.imageInner.size = Integer.parseInt(size);
-        this.imageInner.url = imageUrl;
+    public Images getImages() {
+        return images;
+    }
+
+    public void setImages(Images images) {
+        this.images = images;
     }
 
     public static int getInstanceCounter() {
@@ -229,61 +226,105 @@ public class GifElement {
         this.trending_datetime = trending_datetime;
     }
 
-    public ImageInner getImageInner() {
-        return imageInner;
-    }
-
-    public void setImageInner(ImageInner imageInner) {
-        this.imageInner = imageInner;
-    }
-
-    public class ImageInner{
-
-        public String name;
-        public int height;
-        public int width;
-        public int size;
-        public String url;
-
-        public String getName() {
-            return name;
+    public class Images {
+        public Original getOriginal() {
+            return original;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setOriginal(Original original) {
+            this.original = original;
         }
 
-        public int getHeight() {
-            return height;
-        }
+        public Original original;
 
-        public void setHeight(int height) {
-            this.height = height;
-        }
+        public class Original {
+            @SerializedName("height")
+            @Expose
+            public String height;
+            @SerializedName("width")
+            @Expose
+            public String width;
+            @SerializedName("size")
+            @Expose
+            public String size;
+            @SerializedName("url")
+            @Expose
+            public String url;
+            @SerializedName("mp4_size")
+            @Expose
+            public String mp4_size;
+            @SerializedName("mp4")
+            @Expose
+            public String mp4;
+            @SerializedName("webp_size")
+            @Expose
+            public String webp_size;
 
-        public int getWidth() {
-            return width;
-        }
+            public String getHeight() {
+                return height;
+            }
 
-        public void setWidth(int width) {
-            this.width = width;
-        }
+            public void setHeight(String height) {
+                this.height = height;
+            }
 
-        public int getSize() {
-            return size;
-        }
+            public String getWidth() {
+                return width;
+            }
 
-        public void setSize(int size) {
-            this.size = size;
-        }
+            public void setWidth(String width) {
+                this.width = width;
+            }
 
-        public String getUrl() {
-            return url;
-        }
+            public String getSize() {
+                return size;
+            }
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
+            public void setSize(String size) {
+                this.size = size;
+            }
 
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public String getMp4_size() {
+                return mp4_size;
+            }
+
+            public void setMp4_size(String mp4_size) {
+                this.mp4_size = mp4_size;
+            }
+
+            public String getMp4() {
+                return mp4;
+            }
+
+            public void setMp4(String mp4) {
+                this.mp4 = mp4;
+            }
+
+            public String getWebp_size() {
+                return webp_size;
+            }
+
+            public void setWebp_size(String webp_size) {
+                this.webp_size = webp_size;
+            }
+
+            public String getWebp() {
+                return webp;
+            }
+
+            public void setWebp(String webp) {
+                this.webp = webp;
+            }
+
+            public String webp;
+        }
     }
 }

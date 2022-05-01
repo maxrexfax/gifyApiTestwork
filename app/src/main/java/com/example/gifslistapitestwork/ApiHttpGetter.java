@@ -73,30 +73,30 @@ public class ApiHttpGetter {
                         JSONObject tmpImages = tmpObj.getJSONObject("images");
                         JSONObject tmpImage = tmpImages.getJSONObject("original");
 
-                        _listOfElements.add( new GifElement(
-                                tmpObj.getString("type"),
-                                tmpObj.getString("id"),
-                                tmpObj.getString("url"),
-                                tmpObj.getString("slug"),
-                                tmpObj.getString("bitly_gif_url"),
-                                tmpObj.getString("bitly_url"),
-                                tmpObj.getString("embed_url"),
-                                tmpObj.getString("username"),
-                                tmpObj.getString("source"),
-                                tmpObj.getString("title"),
-                                tmpObj.getString("rating"),
-                                tmpObj.getString("content_url"),
-                                tmpObj.getString("source_tld"),
-                                tmpObj.getString("source_post_url"),
-                                tmpObj.getInt("is_sticker"),
-                                tmpObj.getString("import_datetime"),
-                                tmpObj.getString("trending_datetime"),
-                                "original",
-                                tmpImage.getString("height"),
-                                tmpImage.getString("width"),
-                                tmpImage.getString("size"),
-                                tmpImage.getString("url")
-                                 ));
+//                        _listOfElements.add( new GifElement(
+//                                tmpObj.getString("type"),
+//                                tmpObj.getString("id"),
+//                                tmpObj.getString("url"),
+//                                tmpObj.getString("slug"),
+//                                tmpObj.getString("bitly_gif_url"),
+//                                tmpObj.getString("bitly_url"),
+//                                tmpObj.getString("embed_url"),
+//                                tmpObj.getString("username"),
+//                                tmpObj.getString("source"),
+//                                tmpObj.getString("title"),
+//                                tmpObj.getString("rating"),
+//                                tmpObj.getString("content_url"),
+//                                tmpObj.getString("source_tld"),
+//                                tmpObj.getString("source_post_url"),
+//                                tmpObj.getInt("is_sticker"),
+//                                tmpObj.getString("import_datetime"),
+//                                tmpObj.getString("trending_datetime"),
+//                                "original",
+//                                tmpImage.getString("height"),
+//                                tmpImage.getString("width"),
+//                                tmpImage.getString("size"),
+//                                tmpImage.getString("url")
+//                                 ));
                     }
                     _activity.runOnUiThread(new Runnable()
                     {

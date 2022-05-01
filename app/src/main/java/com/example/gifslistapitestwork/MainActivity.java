@@ -48,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView _recyclerView;
     private String _completeUrl = "https://api.giphy.com/v1/gifs/search?api_key=YGHnKKBGSydS6nSt6WAoUcICWwmgCfvL&q=&limit=25&offset=0&rating=g&lang=en";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         _recyclerView = findViewById(R.id.element_recycler_view);
-        _apiHttpGetter = new ApiHttpGetter(this);
-        _apiHttpGetter.getElements();
+        //_apiHttpGetter = new ApiHttpGetter(this);
+        //_apiHttpGetter.getElements();
+        getDataFromApi();
+
     }
 
     public void showData(ArrayList<GifElement> listOfElements) {
@@ -71,21 +74,26 @@ public class MainActivity extends AppCompatActivity {
 
         GifElementApi gifElementsApi = retrofit.create(GifElementApi.class);
 
-        Call<List<Data>> gifElements = gifElementsApi.getDataElements();
+        Call<Data> gifElements = gifElementsApi.getDataElements();
 
-        gifElements.enqueue(new Callback <List<Data>>() {
+        gifElements.enqueue(new Callback <Data>() {
 
             @Override
-            public void onResponse(Call<List<Data>> call, Response<List<Data>> response) {
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                Log.d("TAG1","81 raw:" + response.raw());
                 if (response.isSuccessful()) {
-                    Log.d("TAG1","84 response " + response.body().size());
+                    if( response.body().getGifElementsArray() != null ) {
+                        Log.d("TAG1","84 response " + response.body().getGifElementsArray().size());
+                    } else {
+                        Log.d("TAG1","84 response response.body().getGifElementsArray()=null!!");
+                    }
                 } else {
                     Log.d("TAG1","87 response code " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Data>> call, Throwable t) {
+            public void onFailure(Call<Data> call, Throwable t) {
                 Log.d("TAG1","93 failure " + t);
             }
         });
